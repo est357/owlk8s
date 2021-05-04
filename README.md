@@ -1,5 +1,7 @@
 # Owlk8s
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/est357/owlk8s.svg)](https://pkg.go.dev/github.com/est357/owlk8s)
+
 Seamless RED monitoring of k8s ClusterIP HTTP services.
 
 
