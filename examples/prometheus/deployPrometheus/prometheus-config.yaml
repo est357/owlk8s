@@ -1,0 +1,19 @@
+global:
+  scrape_interval: 10s # By default, scrape targets every 15seconds. # Attach these labels to any time series or alerts when #communicating with external systems (federation, remote storage, #Alertmanager).
+  scrape_timeout: 10s
+  evaluation_interval: 10s
+  #refresh_interval: 10s
+# Scraping Prometheus itself
+scrape_configs:
+- job_name: 'kubernetes-pods'
+  kubernetes_sd_configs:
+  - role: pod
+  # relabel_configs:
+  # - action: labelmap
+  #   regex: __meta_kubernetes_service_label_(.+)
+  # - source_labels: [__meta_kubernetes_namespace]
+  #   action: replace
+  #   target_label: kubernetes_namespace
+  # - source_labels: [__meta_kubernetes_service_name]
+  #   action: replace
+  #   target_label: kubernetes_name

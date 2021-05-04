@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  creationTimestamp: null
+  labels:
+    app: owlk8s
+  name: owlk8s
+spec:
+  selector:
+    matchLabels:
+      app: owlk8s
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: owlk8s
+    spec:
+      hostNetwork: true
+      containers:
+      - image: owlk8s:0.0.1
+        imagePullPolicy: Never
+        name: owlk8s
+        env:
+         - name: nodename
+           valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+         - name: debug
+           value: "true"
+        resources:
+          limits:
+            cpu: 200m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi

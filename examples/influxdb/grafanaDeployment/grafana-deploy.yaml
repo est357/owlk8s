@@ -1,0 +1,77 @@
+apiVersion: v1
+data:
+  GF_SECURITY_ADMIN_PASSWORD: YWRtaW4=
+  GF_SECURITY_ADMIN_USER: YWRtaW4=
+kind: Secret
+metadata:
+  name: grafana-creds
+type: Opaque
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: grafana
+  name: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: grafana
+    spec:
+      containers:
+      - image: docker.io/grafana/grafana:5.4.5
+        name: grafana
+        volumeMounts:
+        - mountPath: /etc/grafana/provisioning/datasources/influxdb-datasource.yml
+          name: grafana-config
+          readOnly: true
+          subPath: influxdb-datasource.yml
+        - mountPath: /etc/grafana/provisioning/dashboards/grafana-dashboard-provider.yml
+          name: grafana-config
+          readOnly: true
+          subPath: grafana-dashboard-provider.yml
+        - mountPath: /var/lib/grafana/dashboards/Cluster-resources.json
+          name: grafana-config
+          readOnly: true
+          subPath: owlk8s-dash-example.json
+        resources:
+          requests:
+            memory: 200Mi
+            cpu: 500m
+          limits:
+            memory: 1Gi
+            cpu: 2
+        envFrom:
+        - secretRef:
+            name: grafana-creds
+      volumes:
+      - configMap:
+          name: grafana-config
+        name: grafana-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: grafana
+  name: grafana
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: grafana
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
+---
