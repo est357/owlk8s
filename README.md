@@ -86,14 +86,18 @@ env:
 
 ## Packages
 **owlk8s**
+
 Used for monitoring k8s clusters via k8s Informers.
 
 **metrics**
+
 Can be used standalone as an abstraction to all eBPF monitoring logic to create monitoring tools for other types of workload platforms (maybe docker on VM,BM). Constructor takes the interface IP and interface index of the monitored interface.
 ```
 func NewBPFLoader(IP string, ifIndex int) *BpfLoader
 ```
+
 **helpers**
+
 Just some helpers functions used in this module.
 
 ## Caveats
