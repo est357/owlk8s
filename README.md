@@ -74,7 +74,10 @@ All examples have the necessary k8s manifests and build.sh scripts to deploy and
 
 **ENV Variables**
 
-debug - env varibale which if set to true will make the implementation output debug information to stdout.
+debug - env variable which if set to true will make the implementation output debug information to stdout.
+
+cleanBPFMap - Cleans the duration_start eBPF map which holds the HTTP request details until the response comes. It should only be needed in very odd and special cases (flood of requests with no reply at the TCP level - maybe because of some filtering or misbehaving program which should be very unlikely since all action is occurring inside a node) in which this duration_start eBPF map might fill up. Incurs a big performance penalty due to some Go runtime.syscall which I have not investigated.
+
 nodename - set like below in the DaemonSet manifest; examples already contain this
 ```
 env:
