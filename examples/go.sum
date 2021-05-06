@@ -84,6 +84,8 @@ github.com/est357/owlk8s v0.0.0-20210502205857-ba13b44ffa13 h1:pSQetrGHer1TPf5VB
 github.com/est357/owlk8s v0.0.0-20210502205857-ba13b44ffa13/go.mod h1:U9u+4y+orPuKLmokdU8k/GvZYJUHPFrgIKvlUIlmf4E=
 github.com/est357/owlk8s v0.0.0-20210504170027-d94bb317ace8 h1:kOjcbeG0iOa18gIuN8lV2sdo8HXPQslRItlDyXOk1M4=
 github.com/est357/owlk8s v0.0.0-20210504170027-d94bb317ace8/go.mod h1:U9u+4y+orPuKLmokdU8k/GvZYJUHPFrgIKvlUIlmf4E=
+github.com/est357/owlk8s v0.0.0-20210506132831-512e7418f544 h1:tac3NSL3TzK3X1bIDVhoy6QZw9MgerWg8emfYmfsKOw=
+github.com/est357/owlk8s v0.0.0-20210506132831-512e7418f544/go.mod h1:U9u+4y+orPuKLmokdU8k/GvZYJUHPFrgIKvlUIlmf4E=
 github.com/evanphx/json-patch v4.2.0+incompatible/go.mod h1:50XU6AFN0ol/bzJsmQLiYLvXMP4fmwYFNcr97nuDLSk=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=
 github.com/franela/goblin v0.0.0-20200105215937-c9ffbefa60db/go.mod h1:7dvUGVsVBjqR7JHJk0brhHOZYGmfBYOrK0ZhYMEtBr4=

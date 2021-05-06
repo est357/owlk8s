@@ -11,6 +11,7 @@ import (
 	"os"
 	"runtime"
 	"strings"
+	"time"
 )
 
 func init() {
@@ -153,7 +154,9 @@ func (c *MyCollector) registerNewMetrics() {
 			// v.Results is the user's Map map[string]*uint64 with following
 			// keys: "requests", "err4", "err5", "duration" RED
 			res := make(map[string]*uint64)
+			t1 := time.Now().UnixNano()
 			v.Results(res)
+			fmt.Println("Time in GetMetrics:", time.Now().UnixNano()-t1)
 			fmt.Printf("IP: %s, OwnerObj: %s, Pod: %s, NS: %s, SVC: %s, Duration: %d, Requests: %d, Err4: %d Err5: %d\n", k,
 				v.OwnerName, v.PodName, v.NS, v.SvcName, *res["duration"]/1000, *res["requests"], *res["err4"], *res["err5"])
 		}

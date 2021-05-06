@@ -145,9 +145,9 @@ func (bl *BpfLoader) cleanDurMap() {
 		bl.cleanTimer = time.Now().Unix()
 		return
 	}
-	if (time.Now().Unix() - bl.cleanTimer) < 300 {
-		return
-	}
+	// if (time.Now().Unix() - bl.cleanTimer) < 300 {
+	// 	return
+	// }
 	if v, ok := bl.eBPFMaps[bl.eBPFMapName["dur"]]; ok {
 		helpers.Debug("%s", "MapCleaner started.")
 		var key struct {
