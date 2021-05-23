@@ -2,6 +2,7 @@
 package owlk8s
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/est357/owlk8s/helpers"
@@ -52,8 +53,6 @@ func NewController(results ResMap) Controller {
 
 	stopper := make(chan struct{})
 
-	defer runtime.HandleCrash()
-
 	informer.AddEventHandler(cache.ResourceEventHandlerFuncs{
 		AddFunc: func(obj interface{}) {
 			newEndpoint := obj.(*corev1.Endpoints)
@@ -80,7 +79,15 @@ func NewController(results ResMap) Controller {
 
 // Run runs the k8s controller
 func (c Controller) Run() {
-	go c.informer.Run(c.stopper)
+	go func() {
+		defer runtime.HandleCrash()
+		c.informer.Run(c.stopper)
+		if !cache.WaitForCacheSync(c.stopper, c.informer.HasSynced) {
+			runtime.HandleError(fmt.Errorf("Timed out waiting for caches to sync"))
+			return
+		}
+		<-c.stopper
+	}()
 }
 
 func deleteEndpoint(endpoint *corev1.Endpoints, results ResMap) {
